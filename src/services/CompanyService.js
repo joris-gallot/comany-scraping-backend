@@ -1,13 +1,14 @@
 import axios from "axios";
 import { JSDOM } from "jsdom";
 import UserAgent from "user-agents";
-import Company from "./Company.js";
+import Company from "../models/Company.js";
 
 const userAgent = new UserAgent();
 
 export default class CompanyService {
   async search(name) {
     const res = await axios.get("https://www.societe.com/cgi-bin/liste", {
+      responseType: "arraybuffer",
       params: {
         ori: "avance",
         nom: name,
@@ -22,16 +23,21 @@ export default class CompanyService {
     const doc = dom.window.document;
 
     const nodeList = doc.querySelector("#search_details");
-    const nodesCompanies = Array.from(nodeList.children);
 
-    // remove last paragraph
-    nodesCompanies.pop();
+    if (nodeList) {
+      const nodesCompanies = Array.from(nodeList.children);
 
-    const companies = nodesCompanies.map((node) =>
-      this.parseCompany(node).toJson()
-    );
+      // remove last paragraph
+      nodesCompanies.pop();
 
-    return companies;
+      const companies = nodesCompanies.map((node) =>
+        this.parseCompany(node).toJson()
+      );
+
+      return companies;
+    }
+
+    return [];
   }
 
   parseCompany(node) {
