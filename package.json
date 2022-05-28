@@ -1,0 +1,22 @@
+{
+  "name": "company-scraping-2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "dev": "nodemon main.js"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "fastify": "^3.29.0",
+    "jsdom": "^19.0.0",
+    "user-agents": "^1.0.1030"
+  }
+}
