@@ -1,24 +1,14 @@
 import fastifyCors from "@fastify/cors";
 import dotenv from "dotenv";
 import _fastify from "fastify";
-import CompanyService from "./src/services/CompanyService.js";
+import routes from "./src/routes.js";
 
 dotenv.config();
 
-const fastify = _fastify({ logger: true });
+const fastify = _fastify();
+
 fastify.register(fastifyCors);
-
-const companyService = new CompanyService();
-
-fastify.get("/search", (request, reply) => {
-  const { q } = request.query;
-
-  if (q) {
-    return companyService.search(q);
-  }
-
-  reply.code(400).send({ error: "Bad Request" });
-});
+fastify.register(routes);
 
 const start = async () => {
   try {
