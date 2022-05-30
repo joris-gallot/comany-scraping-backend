@@ -1,9 +1,10 @@
 export default class Company {
-  constructor(name, description, siren, address) {
+  constructor(name, description, siren, address, slug) {
     this.name = name;
     this.description = description;
     this.siren = siren;
     this.address = address;
+    this.slug = slug;
   }
 
   toJson() {
@@ -12,6 +13,7 @@ export default class Company {
       description: this.description,
       siren: this.siren,
       address: this.address,
+      slug: this.slug,
     };
   }
 }
